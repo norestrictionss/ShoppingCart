@@ -5,7 +5,7 @@ db = require('mongoose')
 
 
 const connectdb = require('../models/connectdb')
-app = express.Router()
+router = express.Router()
 
 const {MongoClient} = require('mongodb')
 const uri = "mongodb+srv://girayakman1:BvDkA5ENfHiOHPZJ@cluster0.tbu8w14.mongodb.net/?retryWrites=true&w=majority"
@@ -13,13 +13,15 @@ const uri = "mongodb+srv://girayakman1:BvDkA5ENfHiOHPZJ@cluster0.tbu8w14.mongodb
 const client = MongoClient
  
 
+router.get('/about', (req, res)=>{
 
 
-app.get('/Products/', async(req, res)=>{
-
-    client.conn
-
+    res.render('templates/about.html')
 
 
 })
+
+
+
+module.exports = router
 

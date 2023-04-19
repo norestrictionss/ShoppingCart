@@ -1,18 +1,21 @@
 express = require('express')
-const mongoose = require('mongoose')
+const router = require('./routes/router')
 const bodyParser = require('body-parser')
-const {MongoClient, ObjectId} = require('mongodb')
+const {MongoClient} = require('mongodb')
 const uri = "mongodb+srv://girayakman1:BvDkA5ENfHiOHPZJ@cluster0.tbu8w14.mongodb.net/?retryWrites=true&w=majority"
-
+const PORT = 3000
 const client = new MongoClient(uri)
 
 
 app = express()
 
 
-app.use('/', express.static('./static'))
+app.use('/public/images', express.static('./public/images'))
+
+app.set('view engine', 'ejs')
 var collections
  
+app.use('/about', router);
 // Parses the text as url encoded data
 app.use(bodyParser.urlencoded({extended: true}));
  
@@ -20,29 +23,46 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
  
 
-app.get('/Products', async(req, res)=>{
-    
+app.get('/', (req, res)=>{
 
+
+    res.render('index')
+})
+
+app.get('/products', async(req, res)=>{
+    
     
     try{
-        (await client.connect())
-        console.log("occ")
-        const cursor = client.db("FirstDatabase")
 
-        const collection = await cursor.Products.findOne({_id: "642dd2f2c2bf135af19e81c8"})
-        console.log(collection)
+        (await client.connect())
+        const cursor = client.db("FirstDatabase")
         
-        res.send(collection)
+        const collection = await cursor.collection("Products").find({}).toArray()
+        
+        res.render('products', {collections: collection})
+       
+        
         
     }
     catch(err){
         console.log(err)
     }
 
+    
+
 
 })
 
-app.listen(8000)
+app.get('/about', (req, res)=>{
+
+
+    res.render('about', {title:'Hello!', name:'Giray'})
+
+
+
+})
+
+app.listen(PORT)
 
 
 
