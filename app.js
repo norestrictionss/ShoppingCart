@@ -29,6 +29,8 @@ app.get('/', (req, res)=>{
     res.render('index')
 })
 
+
+// GET method for products page
 app.get('/products', async(req, res)=>{
     
     
@@ -52,6 +54,8 @@ app.get('/products', async(req, res)=>{
 
 
 })
+
+// Get Method for about page
 
 app.get('/about', (req, res)=>{
 

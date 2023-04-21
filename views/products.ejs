@@ -22,10 +22,29 @@
 
 
 }
- ul li{
-  padding: 20px;
+
+ .products-section{
+
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    margin-left: 150px;
+    margin-top: 80px;
+    
  }
- 
+
+ .product{
+    width: 250px;
+    height: 400px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    position: relative;
+    
+
+ }
+  body{
+
+    background-image: url('../public/images/background.jpg');
+ }
 </style>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -47,10 +66,13 @@
             <li class="nav-item">
               <a class="nav-link" href="/about"><h1>ABOUT</h1></a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/cart"><h1>CART</h1></a>
+            </li>
           </ul>
           
           <span class="navbar-text">
-            Navbar text with an inline element
+           
           </span>
         </div>
     </nav>
@@ -60,22 +82,32 @@
 
 
 
-            <h1>PRODUCTS</h1>
+            <div class="products-section">
+              
+              <% for(var i=0; i < collections.length; i++) { %>
+                <% if(collections[i].product_count_on_stock>0){ %>
+                <div class = "product">
+                    <div class = "product-image">
+                        <img src="../public/images/<%= collections[i]._id %>.jpg" width= "500" height = "500" alt=""/>
+                    </div>
+
+                    <div class = "product-details">
+                      
 
 
-            <table>
-                <% for(var i=0; i < collections.length; i++) { %>
-                   <tr>
-                    
-                    <img src="../public/images/<%= collections[i]._id %>.jpg" width= "500" height = "500" alt=""/>
-
-                    <td><%= collections[i]._id %></td>
-                     <td><%= collections[i].product_name %></td>
-                     <td><%= collections[i].product_price %></td>
-                   </tr>
+                        <h5><%= collections[i].product_name %></h5>
+                        <h5><%= collections[i].product_price %> USD</h5>
+                        <button class = "btn btn-warning">
+                          <i class="fad fa-shopping-cart" style="--fa-primary-color: #511f50; --fa-secondary-color: #1f4551;">Add to Cart</i>
+                        </button>
+  
+                
+                    </div>
+                </div>
                 <% } %>
-            
-            </table>
+             <% } %>
+            </div>
+
             
 
         </div>
