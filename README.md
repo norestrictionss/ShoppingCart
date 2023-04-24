@@ -16,15 +16,24 @@ There are some npm modules to be installed. But before, project must be cloned.
 
   1. Clone the repo 
 
-    git clone https://github.com/your_username_/Project-Name.git
+    git clone https://github.com/norestrictionss/ShoppingCart.git
 
   2. Installation of npm Packages
-
+    '''sh
     npm install mongodb
+    '''
+    '''sh
     npm install ejs
-    npm install mongoose 
+    '''
+    '''sh
+    npm install mongoose
+    '''
+    '''sh
     npm install body-parser
+    '''
+    '''sh
     npm install express
+    '''
 
 
 ### Usage
